@@ -1,6 +1,5 @@
 # 🤖 Windows Telegram RAT (Remote Administration Tool)
 
-**Версия:** 7.0 (на основе кода)  
 **Платформа:** Windows (x86_64)  
 **Язык:** Rust  
 **Лицензия:** Только для образовательных целей
